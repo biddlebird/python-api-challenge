@@ -31,25 +31,40 @@ from citipy import citipy
 ### Data Collection
 To collect weather data, I utilized the OpenWeatherMap API, which provides access to real-time weather data for cities around the world. I began by generating a list of random geographic coordinates using Python, and then used the citipy library to find the nearest cities to these coordinates. This approach ensured a diverse and global selection of cities. Once the city list was compiled, I made API requests to OpenWeatherMap to retrieve weather data, including temperature, humidity, cloudiness, and wind speed, for over 500 cities.
 
-### Data Visualization
+#### Data Visualization
 With the collected weather data, I created a series of scatter plots to explore the relationships between latitude and various weather parameters. Specifically, I visualized:
 
-Latitude vs. Temperature
-Latitude vs. Humidity
-Latitude vs. Cloudiness
-Latitude vs. Wind Speed
-These scatter plots allowed me to observe patterns and trends in how each weather variable changes with proximity to the equator. Each plot was carefully labeled and color-coded to highlight any notable correlations.
-
-### Linear Regression Analysis
+##### Linear Regression Analysis
 To further analyze the relationship between latitude and weather variables, I performed linear regression analysis on each pair of data points. The goal was to determine if there was a statistically significant trend between latitude and each weather parameter. I computed the linear regression line, the regression equation, and the R-value for each plot. Additionally, I split the data into two groups based on hemispheres—Northern Hemisphere (latitude ≥ 0) and Southern Hemisphere (latitude < 0)—to identify any differences in trends between the two regions. This approach provided a clearer understanding of how latitude influences weather patterns across the globe.
 
-### Key Findings
-Through the analysis conducted in WeatherPy, several key findings emerged:
+##### Latitude vs. Temperature
+As latitude approaches 0º (the Equator), temperatures rise to a peak of 41.07ºC. Moving away from the Equator, temperatures steadily decrease, reaching a low of -10.24ºC. The coldest temperatures are found near the poles, while the Equator experiences the highest temperatures.
 
-- Latitude vs. Temperature: As expected, temperature showed a clear trend with latitude. Temperatures were highest near the Equator (0º latitude) and gradually decreased as one moved toward the poles. This confirms the well-known phenomenon that regions closer to the Equator tend to be warmer, while those near the poles are colder.
-- Latitude vs. Humidity: There was no strong correlation between latitude and humidity, as indicated by the low R-value. However, some patterns suggested that humidity levels might be slightly higher near the Equator and lower at higher latitudes. The data showed considerable variation, suggesting that other factors may influence humidity more strongly than latitude alone.
-- Latitude vs. Cloudiness: Cloudiness also did not exhibit a strong correlation with latitude. However, a pattern emerged where cloudiness was often clustered around 0% or 100%, with fewer instances of moderate cloudiness. This suggests that certain latitudes may experience extreme cloud conditions—either very clear or very cloudy—rather than a balanced mix.
-- Latitude vs. Wind Speed: Wind speeds were generally lower near the Equator and higher at the poles, with the highest wind speeds observed at latitudes furthest from the Equator. This finding aligns with the understanding that wind speeds are often influenced by the Earth's rotation and the distribution of atmospheric pressure systems, which vary by latitude.
+![alt text](https://github.com/biddlebird/python-api-challenge/blob/main/WeatherTrends/1.Lat.Temp.North.png)
+![alt text](https://github.com/biddlebird/python-api-challenge/blob/main/WeatherTrends/2.Lat.Temp.South.png)
+
+##### Latitude vs. Humidity
+
+There is a weak correlation between humidity and latitude, as indicated by an R-value close to 0. This suggests that the linear regression line does not fit the data well, and no consistent trend is apparent. While there may be a slight indication of lower humidity levels near the Equator, further analysis is needed to confirm any significant patterns. 
+
+![alt text](https://github.com/biddlebird/python-api-challenge/blob/main/WeatherTrends/3.Lat.Hum.North.png)
+![alt text](https://github.com/biddlebird/python-api-challenge/blob/main/WeatherTrends/4.Lat.Hum.South.png)
+
+##### Latitude vs. Cloudiness
+
+The line of best fit is not an ideal method for evaluating this data set, as the R-value is close to 0, indicating a poor fit. However, a noticeable pattern emerges, with 'cloudiness' often clustering near 0% or 100%, leaving a gap in the middle of the graph. A more effective approach might be to calculate the average cloudiness at each latitude over several years to better understand the correlation. Additionally, breaking the data down by seasons and comparing the Northern and Southern Hemispheres could provide further insights into how cloudiness varies with latitude.
+
+![alt text](https://github.com/biddlebird/python-api-challenge/blob/main/WeatherTrends/5.Lay.Cloud.North.png)
+![alt text](https://github.com/biddlebird/python-api-challenge/blob/main/WeatherTrends/6.Lay.Cloud.South.png)
+
+##### Latitude vs. Wind Speed
+
+While the line of best fit doesn't clearly define the trend, it's evident that the average wind speed hovers around 6 m/s. By removing extreme outliers and calculating the average, we could gain valuable insights into global wind patterns. It's important to note that the highest wind speeds in both the Northern and Southern Hemispheres are found farthest from the Equator, while the lowest wind speeds occur much closer to the Equator.
+
+![alt text](https://github.com/biddlebird/python-api-challenge/blob/main/WeatherTrends/7.Lat.Wind.North.png)
+![alt text](https://github.com/biddlebird/python-api-challenge/blob/main/WeatherTrends/8.Lat.Wind.South.png)
+
+These scatter plots allowed me to observe patterns and trends in how each weather variable changes with proximity to the equator. Each plot was carefully labeled and color-coded to highlight any notable correlations.
 
 Overall, the analysis confirmed some expected trends, such as the temperature-latitude relationship, while also revealing more nuanced patterns in humidity, cloudiness, and wind speed. These findings offer valuable insights into how weather variables interact with latitude, though further analysis could explore additional factors and seasonal variations.
 
@@ -65,6 +80,8 @@ I applied these filters to the weather data collected in WeatherPy, narrowing do
 
 ### Map Visualization
 Using the `geoViews` Python library, I created interactive maps to visualize the filtered weather data. The maps displayed a point for each city, with the size of the point representing the humidity level. This allowed for a clear and interactive way to identify regions with ideal weather conditions at a glance. By hovering over each point, users could see additional information about the city, such as its name and specific weather details. This visualization provided a powerful tool for quickly assessing the best vacation spots based on real-time weather data.
+
+![alt text](https://github.com/biddlebird/python-api-challenge/blob/main/map.png) 
 
 ### Hotel Data Integration
 To enhance the value of the map visualizations, I integrated hotel data using the Geoapify API. For each city that met the weather criteria, I queried the API to find the nearest hotel within a 10,000-meter radius. The hotel names and countries were then added to the map as hover information, enriching the interactive experience. This integration allowed users not only to identify ideal vacation destinations based on weather but also to find convenient accommodation options in those areas. By incorporating hotel data into the map visualizations, I provided a more comprehensive tool for planning vacations, combining both weather and lodging considerations into a single, easy-to-use interface.
